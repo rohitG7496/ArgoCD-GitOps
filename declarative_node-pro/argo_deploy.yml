@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata: 
+  name: 3-tier-app
+  namespace: argocd
+spec: 
+  project: default
+  source: 
+    repoURL: https://github.com/rohitG7496/ArgoCD-GitOps.git
+    targetRevision: HEAD
+    path: declarative_node-pro
+  destination: 
+    server: 
+    namespace: db
+  syncPolicy: 
+    automated: 
+      prune: true
+      selfHeal: true
+    
