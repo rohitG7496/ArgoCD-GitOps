@@ -7,13 +7,15 @@ spec:
   project: default
   source: 
     repoURL: https://github.com/rohitG7496/ArgoCD-GitOps.git
-    targetRevision: HEAD
+    targetRevision: main
     path: declarative_node-pro
   destination: 
-    server: 
+    server: https://kubernetes.default.svc
     namespace: db
   syncPolicy: 
     automated: 
       prune: true
       selfHeal: true
+  syncOptions: 
+    - CreateNameSpace=true    
     
