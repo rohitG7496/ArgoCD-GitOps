@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: appProject
+metdata:
+  name: 3-tier-app
+  namespace: argocd
+spec: 
+  description: This is a 3-tier application appProject
+  sourceRepos:
+    - https://github.com/rohitG7496/ArgoCD-GitOps.git
+  destinations:
+    - namespace: db
+      server: 
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  roles:
+    - name: 3-tier-app
+      description: Admin for 3-tier-app
+      policies:
+        - p, proj:3-tier-app:3-tier-admin, applications, * 3-tier-app/*, allow
+        
+        
+
+  
+    
+    
