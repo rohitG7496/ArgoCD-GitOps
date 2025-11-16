@@ -1,5 +1,5 @@
 apiVersion: argoproj.io/v1alpha1
-kind: appProject
+kind: AppProject
 metdata:
   name: 3-tier-app
   namespace: argocd
@@ -21,7 +21,7 @@ spec:
       description: Admin for 3-tier-app
       policies:
         - p, proj:3-tier-app:3-tier-admin, applications, * 3-tier-app/*, allow
-        
+
         
 
   
