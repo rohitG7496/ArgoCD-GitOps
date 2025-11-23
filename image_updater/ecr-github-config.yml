@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: argocd-image-updater-config
-  namespace: argocd
+  namespace: argocd-image-updater-system
 data:
   registries.conf: |
     registries:
