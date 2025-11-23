@@ -15,15 +15,15 @@ kind: Deployment
 metadata:
   name: backend
   namespace: db
-  labels: 
+  labels:
     app: backend
-spec: 
+spec:
   replicas: 1
   selector:
     matchLabels:
       app: backend
-  template: 
-    metadata: 
+  template:
+    metadata:
       labels:
         app: backend
     spec:
@@ -31,17 +31,17 @@ spec:
         node: app
       containers:
         - name: backend
-          image: rohit7496/backend:latest
+          image: 120496071282.dkr.ecr.ap-south-1.amazonaws.com/rohit_ecr:backend-v1.0.0
           ports:
             - containerPort: 5000
-          env: 
+          env:
             - name: DB_HOST
-              valueFrom: 
+              valueFrom:
                 configMapKeyRef:
                   name: backend-configmap
                   key: DB_HOST
             - name: DB_USER
-              valueFrom: 
+              valueFrom:
                 configMapKeyRef:
                   name: backend-configmap
                   key: DB_USER
@@ -59,7 +59,7 @@ spec:
 ---
 apiVersion: v1
 kind: Service
-metadata: 
+metadata:
   name: backend
   namespace: db
 spec:
@@ -84,7 +84,7 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-      - dev.jnrpro.solutions
+        - dev.jnrpro.solutions
       secretName: letsencrypt-prod
   rules:
     - host: dev.jnrpro.solutions

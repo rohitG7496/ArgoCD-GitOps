@@ -1,14 +1,14 @@
 ---
 apiVersion: apps/v1
 kind: Deployment
-metadata: 
+metadata:
   name: frontend
   namespace: db
   labels:
     app: frontend
-spec: 
+spec:
   replicas: 1
-  selector: 
+  selector:
     matchLabels:
       app: frontend
   template:
@@ -20,17 +20,17 @@ spec:
         node: app
       containers:
         - name: frontend
-          image: rohit7496/frontend:latest
+          image: 120496071282.dkr.ecr.ap-south-1.amazonaws.com/rohit_ecr:frontend-v1.0.0
           ports:
             - containerPort: 80
-    
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: frontend-svc
   namespace: db
-spec: 
+spec:
   selector:
     app: frontend
   ports:
@@ -52,7 +52,7 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-      - dev.jnrpro.solutions
+        - dev.jnrpro.solutions
       secretName: letsencrypt-prod
   rules:
     - host: dev.jnrpro.solutions
