@@ -21,6 +21,8 @@ spec:
       containers:
         - name: frontend
           image: 120496071282.dkr.ecr.ap-south-1.amazonaws.com/rohit_ecr:frontend-v1.0.0
+          imagePullSecrets:
+            - name: ecr-secret
           ports:
             - containerPort: 80
 
