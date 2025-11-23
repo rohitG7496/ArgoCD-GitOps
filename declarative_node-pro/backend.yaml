@@ -29,11 +29,11 @@ spec:
     spec:
       nodeSelector:
         node: app
+      imagePullSecrets:
+        - name: ecr-secret
       containers:
         - name: backend
           image: 120496071282.dkr.ecr.ap-south-1.amazonaws.com/rohit_ecr:backend-v1.0.0
-          imagePullSecrets:
-            - name: ecr-secret
           ports:
             - containerPort: 5000
           env:
