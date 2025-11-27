@@ -1,18 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argo-image-updater
+  name: 3-tier-app
   namespace: argocd
   annotations:
-    argocd-image-updater.argoproj.io/image-list: >
-      backend=120496071282.dkr.ecr.ap-south-1.amazonaws.com/rohit_ecr:backend,
-      frontend=120496071282.dkr.ecr.ap-south-1.amazonaws.com/rohit_ecr:frontend
-    argocd-image-updater.argoproj.io/backend.update-strategy: latest
-    argocd-image-updater.argoproj.io/frontend.update-strategy: latest
-    argocd-image-updater.argoproj.io/backend.set-application-resource: Deployment/backend:spec.template.spec.containers[0].image
-    argocd-image-updater.argoproj.io/frontend.set-application-resource: Deployment/frontend:spec.template.spec.containers[0].image
-    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
-    argocd-image-updater.argoproj.io/git-branch: main
+    image-updater.argoproj.io/frontend.image-name: 120496071282.dkr.ecr.ap-south-1.amazonaws.com/rohit_ecr
+    image-updater.argoproj.io/backend.update-strategy: latest
+    image-updater.argoproj.io/frontend.update-strategy: latest
+    image-updater.argoproj.io/write-back-target: kustomize:./declarative_node-pro
+    image-updater.argoproj.io/git-credentials: argocd/git-creds
 spec:
   project: default
   source:
@@ -26,3 +22,5 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

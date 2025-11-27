@@ -1,11 +1,8 @@
-#!/bin/bash
-# Ensure the namespace exists
-kubectl create namespace db --dry-run=client -o yaml | kubectl apply -f -
+ECR_PASSWD=$(aws ecr get-login-password --region ap-south-1)
 
-# Create or update the secret
-kubectl create secret docker-registry ecr-secret \
+kubectl create secret docker-registry ecr-auth-updater \
     --docker-server=120496071282.dkr.ecr.ap-south-1.amazonaws.com \
     --docker-username=AWS \
-    --docker-password="$(aws ecr get-login-password --region ap-south-1)" \
-    --namespace db \
+    --docker-password="$ECR_PASSWD" \
+    --namespace argocd-image-updater-system \
     --dry-run=client -o yaml | kubectl apply -f -
